@@ -1,10 +1,14 @@
 let currentLanguage = 'es';
 const apiKey = '10abff4ebbcdab126ecf38c3862cf2b7';
-const token = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxMGFiZmY0ZWJiY2RhYjEyNmVjZjM4YzM4NjJjZjJiNyIsInN1YiI6IjY0ZjEzYmFhZWJiOTlkMDEzYmNmMDRjNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ZAINrGQZNJvcCPmDqcDfgEeS3jprJTtMPEDEga4vyHw';
 const apiUrl = 'https://api.themoviedb.org/3/';
 const languageSelect = document.getElementById('languageSelect');
 const genreSelect = document.getElementById('genreSelect');
 const moviesContainer = document.getElementById('moviesContainer');
+const paginationContainer = document.getElementById('paginationContainer');
+const pageInfo = document.getElementById('pageInfo');
+
+let currentPage = 1;
+let currentGenreId = '';
 
 function loadGenres() {
     fetch(`${apiUrl}genre/movie/list?api_key=${apiKey}&language=${currentLanguage}`)
@@ -20,14 +24,15 @@ function loadGenres() {
         .catch(error => console.error('Error al cargar géneros:', error));
 }
 
-function loadPopularMovies(genreId = '') {
+function loadMovies(page = 1) {
     const params = new URLSearchParams({
         api_key: apiKey,
         language: currentLanguage,
-        with_genres: genreId
+        page: page,
+        with_genres: currentGenreId
     });
 
-    fetch(`${apiUrl}movie/popular?${params}`)
+    fetch(`${apiUrl}discover/movie?${params}`)
         .then(response => response.json())
         .then(data => {
             moviesContainer.innerHTML = '';
@@ -52,25 +57,58 @@ function loadPopularMovies(genreId = '') {
 
                 moviesContainer.appendChild(movieCard);
             });
+
+            // Actualizar información de paginación
+            const totalPages = data.total_pages;
+            pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+
+            // Mostrar u ocultar botones de paginación según corresponda
+            if (currentPage === 1) {
+                prevPageButton.disabled = true;
+            } else {
+                prevPageButton.disabled = false;
+            }
+
+            if (currentPage === totalPages) {
+                nextPageButton.disabled = true;
+            } else {
+                nextPageButton.disabled = false;
+            }
         })
         .catch(error => console.error('Error al cargar películas:', error));
 }
 
 // Evento de cambio en el select de idioma
-languageSelect.addEventListener('change', function() {
+languageSelect.addEventListener('change', function () {
     currentLanguage = this.value;
-    // Recargar géneros y películas con el nuevo idioma seleccionado
-    genreSelect.innerHTML = ''; // Limpiar el select de géneros
-    loadGenres();
-    loadPopularMovies();
+    currentPage = 1; // Reiniciar página al cambiar el idioma
+    loadMovies();
 });
 
 // Evento de cambio en el select de géneros
-genreSelect.addEventListener('change', function() {
-    const selectedGenreId = this.value;
-    loadPopularMovies(selectedGenreId);
+genreSelect.addEventListener('change', function () {
+    currentGenreId = this.value;
+    currentPage = 1; // Reiniciar página al cambiar el género
+    loadMovies();
+});
+
+// Botones de paginación
+const prevPageButton = document.getElementById('prevPage');
+const nextPageButton = document.getElementById('nextPage');
+
+prevPageButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        loadMovies(currentPage);
+    }
+});
+
+nextPageButton.addEventListener('click', () => {
+    currentPage++;
+    loadMovies(currentPage);
 });
 
 // Cargar géneros y películas al cargar la página
 loadGenres();
-loadPopularMovies();
+loadMovies();
+

@@ -1,104 +1,79 @@
 /* Estilo para el cuerpo de la página */
 body {
     font-family: Arial, sans-serif;
-    background-color: #FFA500; /* Cambia el color de fondo a anaranjado */
     margin: 0;
     padding: 0;
+    background-color: #0B2237; /* Color de fondo */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1600 800'%3E%3Cg %3E%3Cpolygon fill='%23281b2c' points='1600 160 0 460 0 350 1600 50'/%3E%3Cpolygon fill='%23441421' points='1600 260 0 560 0 450 1600 150'/%3E%3Cpolygon fill='%23610e16' points='1600 360 0 660 0 550 1600 250'/%3E%3Cpolygon fill='%237d070b' points='1600 460 0 760 0 650 1600 350'/%3E%3Cpolygon fill='%239A0000' points='1600 800 0 800 0 750 1600 450'/%3E%3C/g%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 /* Estilo para el contenedor principal */
-.center {
+.container {
     text-align: center;
+    max-width: 1200px; /* Ancho máximo del contenido */
     margin: 0 auto;
-    max-width: 800px;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente blanco */
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente blanco */
     border-radius: 10px; /* Borde redondeado */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Sombra suave */
 }
 
 /* Estilo para el título */
 h1 {
-    text-align: center;
-    color: #333;
+    font-size: 24px;
+    color: #FFA500; /* Texto en color naranja */
+    margin-bottom: 20px;
 }
 
 /* Estilo para el contenedor de opciones */
 .options {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
+    justify-content: center; /* Centra horizontalmente */
+    margin-bottom: 20px;
 }
 
 /* Estilo para cada opción */
 .option {
-    flex: 0 0 calc(50% - 10px); /* Ancho del 50% menos el espacio entre */
+    margin: 0 10px; /* Espacio entre opciones */
 }
 
 /* Estilo para los títulos de opciones */
 .option label {
     display: block;
     text-align: left;
-    color: #333; /* Cambia el color de las etiquetas */
+    color: #fff8f8; /* Texto en color blanco */
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
+/* Estilo para los selectores de idioma y género */
 .small-select {
-    width: 100%; /* Ancho completo para las opciones de selección */
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0; /* Cambia el color de fondo a gris */
-    font-size: 12px;
-}
-
-/* Estilo para el campo de búsqueda */
-.search-box {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-/* Estilo para el campo de búsqueda y botón */
-.search-box label {
-    display: block;
-    margin-bottom: 5px;
-}
-
-#movieSearch {
-    width: 100%;
-    padding: 3px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f0f0f0; /* Cambia el color de fondo a gris */
-    font-size: 12px;
-    margin-bottom: 5px;
-}
-
-#searchButton {
     width: 100%;
     padding: 5px;
-    background-color: #333;
-    color: #fff;
-    border: none;
+    border: 1px solid #FFA500; /* Borde en color naranja */
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 12px;
+    background-color: rgb(255, 255, 255); /* Fondo semi-transparente blanco */
+    font-size: 14px;
+    color: #000000; /* Texto en color blanco */
+}
+
+/* Estilo para el contenedor de películas */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Muestra 4 películas por fila */
+    gap: 20px; /* Espacio entre películas */
+    margin-bottom: 20px;
 }
 
 /* Estilo para las tarjetas de película */
-.movie-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
 .movie-card {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin: 5px;
+    background-color: #333; /* Fondo de tarjeta en color oscuro */
+    border: 1px solid #FFA500; /* Borde en color naranja */
+    border-radius: 10px;
     padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    width: calc(25% - 10px);
-    box-sizing: border-box;
+    box-shadow: 0 0 5px rgba(255, 165, 0, 0.5); /* Sombra suave en color naranja */
     text-align: center;
 }
 
@@ -107,19 +82,50 @@ h1 {
     max-width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; /* Centra horizontalmente la imagen */
+    border-radius: 5px;
 }
 
 /* Estilo para el título de la película */
 .movie-card h2 {
-    font-size: 14px;
-    margin-top: 5px;
-    color: #333;
+    font-size: 16px;
+    color: #FFA500; /* Texto en color naranja */
+    margin-top: 10px;
 }
 
 /* Estilo para la descripción de la película debajo de la imagen */
 .movie-card p {
     font-size: 12px;
-    color: #666;
-    margin-top: 5px;
+    color: #FFFFFF; /* Texto en color blanco */
+    margin-top: 10px;
+}
+
+/* Estilo para los botones de paginación */
+.pagination {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    margin-top: 20px;
+}
+
+.pagination button {
+    padding: 10px 20px;
+    background-color: #FFA500; /* Fondo de botones en color naranja */
+    color: #FFFFFF; /* Texto en color blanco */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 10px; /* Espacio entre botones */
+}
+
+.pagination button:hover {
+    background-color: #FF8000; /* Color naranja más claro al pasar el cursor */
+}
+
+/* Estilo para el cuadro de información de la página actual */
+#pageInfo {
+    font-size: 14px;
+    color: #FFFFFF; /* Texto en color blanco */
+    margin: 0 20px; /* Espacio entre el cuadro de información y los botones de paginación */
 }

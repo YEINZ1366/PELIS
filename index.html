@@ -7,32 +7,38 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="center">
+    <div class="container">
         <h1>Películas Populares</h1>
 
-        <!-- Campo de búsqueda -->
-        <div class="search-box">
-            <label for="movieSearch">Buscar película:</label>
-            <input type="text" id="movieSearch" placeholder="Ingrese el nombre de la película">
-            <button id="searchButton">Buscar</button>
+        <div class="options">
+            <!-- Selector de idioma -->
+            <div class="option">
+                <label for="languageSelect">Seleccionar idioma:</label>
+                <select id="languageSelect" class="small-select">
+                    <option value="es">Español</option>
+                    <option value="en">Inglés</option>
+                </select>
+            </div>
+
+            <!-- Filtro por género -->
+            <div class="option">
+                <label for="genreSelect">Filtrar por género:</label>
+                <select id="genreSelect" class="small-select">
+                    <option value="">Todos los géneros</option>
+                    <!-- Las opciones del select se llenarán dinámicamente con JavaScript -->
+                </select>
+            </div>
         </div>
-
-        <!-- Selector de idioma -->
-        <label for="languageSelect">Seleccionar idioma:</label>
-        <select id="languageSelect" class="small-select">
-            <option value="es">Español</option>
-            <option value="en">Inglés</option>
-        </select>
-
-        <!-- Filtro por género -->
-        <label for="genreSelect">Filtrar por género:</label>
-        <select id="genreSelect" class="small-select">
-            <option value="">Todos los géneros</option>
-            <!-- Las opciones del select se llenarán dinámicamente con JavaScript -->
-        </select>
 
         <!-- Contenedor para mostrar las películas -->
         <div id="moviesContainer" class="movie-grid"></div>
+
+        <!-- Botones de paginación -->
+        <div class="pagination">
+            <button id="prevPage">Página anterior</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage">Página siguiente</button>
+        </div>
     </div>
 
     <!-- JavaScript -->
